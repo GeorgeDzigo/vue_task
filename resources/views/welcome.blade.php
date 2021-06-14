@@ -13,7 +13,7 @@
         <div id="root" class="container mt-3">
             <section class="border p-4 mb-4">
                 <div class="form-outline mb-4">
-                    <input type="search" id="datatable-search-input" class="form-control" v-model="search">
+                    <input type="search" id="datatable-search-input" class="form-control" v-model='message'>
                     <div class="form-notch">
                         <div class="form-notch-leading" style="width: 9px;"></div>
                         <div class="form-notch-middle" style="width: 52px;"></div>
@@ -41,12 +41,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for='user in filteredUsers'>
+                                <tr v-for='user in searchedUsers'>
                                     <td>@{{ user.name }}</td>
                                     <td>@{{ user.email }}</td>
                                     <td>@{{ user.email_verified_at }}</td>
                                     <td>@{{ user.created_at }}</td>
                                 </tr>
+
+
                             </tbody>
                         </table>
                         <div class="ps__rail-x" style="width: 949px; left: 0px; bottom: 0px;">

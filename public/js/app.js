@@ -3,27 +3,27 @@ new Vue({
     data: {
         users: [],
         errors: [],
-        search: '',
+        message: '',
+    },
+
+    created() {
+        this.getUsers();
+        setInterval(this.getUsers, 150000);
+    },
+    methods: {
+        getUsers() {
+            axios.get('/api/users')
+            .then(res => this.users = res.data)
+            .catch(err => this.errors = err);
+        }
     },
 
     computed: {
-        filteredUsers() {
-            this.getUsersFromDB();
+        searchedUsers() {
             return this.users.filter(user => {
-                if (user.name.toLowerCase().match(this.search.toLowerCase()) || user.email.toLowerCase().match(this.search.toLowerCase()))
+                if (user.name.toLowerCase().match(this.message.toLowerCase()) || user.email.toLowerCase().match(this.message.toLowerCase()))
                     return true;
-            });
+            })
         }
-    },
-
-    methods: {
-        getUsersFromDB() {
-            axios.get('/api/users')
-            .then(response => this.users = response.data)
-            .catch(errors =>  this.errors = errors);
-        }
-    },
-    created() {
-        this.getUsersFromDB();
     }
 })
